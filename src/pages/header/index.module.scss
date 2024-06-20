@@ -1,0 +1,35 @@
+.header {
+  @apply flex bg-white max-h-[49px] py-[8px] pl-[8px] pr-[24px];
+}
+
+.header-1 {
+  @apply flex flex-1;
+}
+
+.breadcrumb {
+  @apply flex flex-1 bg-white max-h-[49px] py-[8px] items-center;
+}
+
+.iconTextBtn {
+  @apply mr-[8px];
+}
+
+.feature-stack {
+  @apply flex flex-1 max-w-[520px] items-center justify-between;
+}
+
+.iconTextSubBtnStar {
+  @apply text-vb-blue;
+}
+
+.buttonIcon {
+  @apply flex min-w-[32px] min-h-[32px] rounded-lg items-center justify-center bg-white text-black/50 hover:bg-black/10 transition duration-300;
+}
+
+.textButton {
+  @apply flex min-h-[32px] px-[12px] text-black/50 items-center rounded-lg hover:bg-black/10 transition duration-300;
+}
+
+.renameInput {
+  @apply flex min-w-[260px] min-h-[32px] px-[4px] text-black/50 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+}
