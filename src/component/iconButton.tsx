@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
 import { FaChevronRight, FaCheck } from 'react-icons/fa6';
 import { BsThreeDots } from 'react-icons/bs';
-import { Tooltip as ReactTooltip } from 'react-tooltip';
+import { dataTheme, DataTheme } from './data';
 import style from './iconButton.module.scss';
 import classNames from 'classnames/bind';
+import Tippy from '@tippyjs/react/headless';
+import TippyContent from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import PopupButton from './popupOfTheme';
 
 const cx = classNames.bind(style);
+
 interface IconButtonProps {
   onClick?: () => void;
   icon?: React.ReactNode;
-  labelTooltip?: string;
+  content?: string;
   className: string;
 }
 
-export const IconButton: React.FC<IconButtonProps> = ({ onClick, icon, labelTooltip, className }) => {
+export const IconButton: React.FC<IconButtonProps> = ({ onClick, icon, className, content }) => {
   return (
-    <>
-      <button onClick={onClick} className={className} data-tooltip-id={labelTooltip}>
+    <TippyContent content={content} disabled={!content}>
+      <button onClick={onClick} className={className}>
         {icon}
       </button>
-      <ReactTooltip
-        id={labelTooltip}
-        place="bottom-end"
-        content={labelTooltip}
-        style={{ color: '#fff', fontWeight: 500 }}
-      />
-    </>
+    </TippyContent>
   );
 };
 
@@ -34,23 +33,18 @@ interface TextButtonProps {
   label?: string;
   icon?: React.ReactNode;
   labelTooltip?: string;
+  content?: string;
   className: string;
 }
 
-export const TextButton: React.FC<TextButtonProps> = ({ onClick, label, icon, labelTooltip, className }) => {
+export const TextButton: React.FC<TextButtonProps> = ({ onClick, label, icon, className, content }) => {
   return (
-    <>
-      <button onClick={onClick} className={className} data-tooltip-id={labelTooltip}>
+    <TippyContent content={content} disabled={!content}>
+      <button onClick={onClick} className={className}>
         {icon}
         <span>{label}</span>
       </button>
-      <ReactTooltip
-        id={labelTooltip}
-        place="bottom"
-        content={labelTooltip}
-        style={{ color: '#fff', fontWeight: 500 }}
-      />
-    </>
+    </TippyContent>
   );
 };
 
@@ -71,33 +65,27 @@ interface RenameTitleProps {
   className?: string;
   labelTooltip?: string;
   placeholder?: string;
+  content?: string;
 }
 
-export const RenameTitle: React.FC<RenameTitleProps> = ({ className, labelTooltip, placeholder }) => {
+export const RenameTitle: React.FC<RenameTitleProps> = ({ className, placeholder, content }) => {
   const [value, setValue] = useState<string>('');
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     console.log(e.target.value);
   };
   return (
-    <>
+    <TippyContent content={content} disabled={!content}>
       <div>
         <input
           className={className} //{cx('renameInput')}
-          data-tooltip-id={labelTooltip} //"tooltip-rename"
           type="text"
           placeholder={placeholder} //"Đổi tên tiêu đề!"
           value={value}
           onChange={handleChange}
         />
       </div>
-      <ReactTooltip
-        id={labelTooltip}
-        place="bottom"
-        content={labelTooltip}
-        style={{ color: '#fff', fontWeight: 500 }}
-      />
-    </>
+    </TippyContent>
   );
 };
 
@@ -107,81 +95,72 @@ interface BtnWtDropdownProps {
   label: string;
   icon: React.ReactNode;
   subIcon: React.ReactNode;
-  labelTooltip: string;
+  content?: string;
 }
 
-export const BtnWtDropdown: React.FC<BtnWtDropdownProps> = ({
-  onClick,
-  subOnClick,
-  label,
-  icon,
-  subIcon,
-  labelTooltip,
-}) => {
+export const BtnWtDropdown: React.FC<BtnWtDropdownProps> = ({ onClick, subOnClick, label, icon, subIcon, content }) => {
   return (
-    <div className={cx('btnDropGroup')}>
-      <button onClick={onClick} className={cx('btnWtDropdown')} data-tooltip-id={labelTooltip}>
-        {icon}
-        <span>{label}</span>
-      </button>
-      <button onClick={subOnClick} className={cx('btnSubWtDropdown')}>
-        {subIcon}
-      </button>
-      <ReactTooltip
-        id={labelTooltip}
-        place="bottom"
-        content={labelTooltip}
-        style={{ color: '#fff', fontWeight: 500 }}
-      />
-    </div>
+    <TippyContent content={content} disabled={!content}>
+      <div className={cx('btnDropGroup')}>
+        <button onClick={onClick} className={cx('btnWtDropdown')}>
+          {icon}
+          <span>{label}</span>
+        </button>
+        <button onClick={subOnClick} className={cx('btnSubWtDropdown')}>
+          {subIcon}
+        </button>
+      </div>
+    </TippyContent>
   );
 };
 
 interface UserImgProps {
   onClick: () => void;
   imgUrl?: string;
+  content?: string;
 }
 
-export const UserImg: React.FC<UserImgProps> = ({ onClick, imgUrl }) => {
+export const UserImg: React.FC<UserImgProps> = ({ onClick, imgUrl, content }) => {
   return (
-    <>
-      <button onClick={onClick} className={cx('userImgBox')} data-tooltip-id="tooltip-profile">
+    <TippyContent content={content} disabled={!content}>
+      <button onClick={onClick} className={cx('userImgBox')}>
         {imgUrl && <img src={imgUrl} className={cx('useImg')} />}
       </button>
-      <ReactTooltip
-        id="tooltip-profile"
-        place="bottom-end"
-        content="Profile Menu"
-        style={{ color: '#fff', fontWeight: 500 }}
-      />
-    </>
+    </TippyContent>
   );
 };
 
 interface CardThemeProps {
-  imgUrl: string;
-  themeName: string;
+  key?: any;
+  imgUrl?: string;
+  themeName?: string;
   borThemeCor?: any;
   titleStyle?: any;
   bodyStyle?: any;
   linkStyle?: any;
+  data: DataTheme;
+  onClick: (id: string) => void;
+  isActive: boolean;
 }
 
 export const CardTheme: React.FC<CardThemeProps> = ({
+  key,
   imgUrl,
   themeName,
   borThemeCor,
   titleStyle,
   bodyStyle,
   linkStyle,
+  onClick,
+  data,
+  isActive,
 }) => {
-  const [isThemeActive, setIsThemeActive] = useState(true);
-  const toggleActive = () => {
-    setIsThemeActive(!isThemeActive);
-  };
+  const [visible, setVisible] = useState(false);
+  const show = () => setVisible(true);
+  const hide = () => setVisible(false);
   return (
-    <div className={cx(isThemeActive ? 'card-theme' : 'card-theme-na')} onClick={toggleActive}>
-      <div className={cx('card-content')}>
+    <div className={cx(isActive ? 'card-theme' : 'card-theme-na')}>
+      <div className={cx('card-content')} onClick={() => onClick(data.id)}>
         <div className={cx('card-border')}>
           {imgUrl && <img src={imgUrl} className={cx('thumbImgBG')} />}
           <div className={cx('show-thumb')}>{imgUrl && <img src={imgUrl} className={cx('thumbImg')} />}</div>
@@ -200,20 +179,33 @@ export const CardTheme: React.FC<CardThemeProps> = ({
           </div>
         </div>
       </div>
-      <div className={cx(isThemeActive ? 'theme-name-area' : 'theme-name-area-na')}>
-        <div className={cx(isThemeActive ? 'theme-name-box' : 'theme-name-box-na')}>
+      <div className={cx(isActive ? 'theme-name-area' : 'theme-name-area-na')}>
+        <div className={cx(isActive ? 'theme-name-box' : 'theme-name-box-na')} onClick={() => onClick(data.id)}>
           <IconButton
-            className={cx(isThemeActive ? 'icon-a' : 'icon-na')}
-            icon={<FaCheck className={cx(isThemeActive ? 'iconAddMg' : 'iconAddMg-na')} />}
+            className={cx(isActive ? 'icon-a' : 'icon-na')}
+            icon={<FaCheck className={cx(isActive ? 'iconAddMg' : 'iconAddMg-na')} />}
           />
-          <div className={cx(isThemeActive ? 'theme-name' : 'theme-name-na')}>{themeName}</div>
+          <div className={cx(isActive ? 'theme-name' : 'theme-name-na')}>{themeName}</div>
         </div>
-        <div className={cx(isThemeActive ? 'theme-space' : 'theme-space-na')}></div>
-        <IconButton
-          className={cx(isThemeActive ? 'theme-function' : 'theme-function-na')}
-          icon={<BsThreeDots className={cx('iconAddMg')} />}
-        />
+        <div className={cx(isActive ? 'theme-space' : 'theme-space-na')} onClick={() => onClick(data.id)}></div>
+        <Tippy
+          render={() => {
+            return <PopupButton />;
+          }}
+          visible={visible}
+          interactive
+          onClickOutside={hide}
+          placement="bottom"
+        >
+          {/* <IconButton
+              className={cx('theme-function')}
+              icon={<BsThreeDots className={cx('iconAddMg')} />}
+              onClick={() => (visible ? hide() : show())}
+            /> */}
+          <div onClick={visible ? hide : show}>***</div>
+        </Tippy>
       </div>
     </div>
   );
 };
+//{/* <div onClick={visible ? hide : show}>hehe</div> */}

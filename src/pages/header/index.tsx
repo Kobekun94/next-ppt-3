@@ -28,10 +28,9 @@ const Header: React.FC<Prop> = ({ children, setShowModal }) => {
             onClick={handle.handleClick}
             label=""
             icon={<AiOutlineHome className={cx('iconTextSubBtn')} />}
-            labelTooltip=""
           />
           <IconBreadcrum label="" />
-          <RenameTitle className={cx('renameInput')} placeholder="Đổi tên tiêu đề!" labelTooltip="tooltip-rename" />
+          <RenameTitle className={cx('renameInput')} placeholder="Đổi tên tiêu đề!" content="Rename" />
         </div>
         <div className={cx('feature-stack')}>
           <TextButton
@@ -41,14 +40,14 @@ const Header: React.FC<Prop> = ({ children, setShowModal }) => {
             }}
             label="Theme"
             icon={<VscSymbolColor className={cx('iconTextBtn')} />}
-            labelTooltip="Edit Theme"
+            content="Edit Theme"
           />
           <TextButton
             className={cx('textButton')}
             onClick={handle.handleClickShare}
             label="Share"
             icon={<IoShareSocialOutline className={cx('iconTextBtn')} />}
-            labelTooltip="This slice is viewable by anyone with the link"
+            content="This slice is viewable by anyone with the link"
           />
           <BtnWtDropdown
             onClick={handle.handleClickPresent}
@@ -56,32 +55,32 @@ const Header: React.FC<Prop> = ({ children, setShowModal }) => {
             icon={<FaPlay className={cx('iconTextBtn')} />}
             subOnClick={handle.handleClickPresent}
             subIcon={<FaChevronDown className={cx('iconTextSubBtn')} />}
-            labelTooltip="Start Presenting"
+            content="Start Presenting"
           />
           <TextButton
             className={cx('textButton')}
             onClick={handle.handleClickMess}
             label="0"
             icon={<FaRegComment className={cx('iconTextBtn')} />}
-            labelTooltip="Comment"
+            content="Comment"
           />
           <IconButton
             className={cx('buttonIcon')}
             onClick={handle.handleClickAI}
             icon={<BsStars className={cx('iconTextSubBtnStar')} />}
-            labelTooltip="Edit with AI"
+            content="Edit with AI"
           />
           <IconButton
             className={cx('buttonIcon')}
             onClick={handle.handleClickAnalytic}
             icon={<MdOutlineAnalytics className={cx('iconTextSubBtn')} />}
-            labelTooltip="View Analytics"
+            content="View Analytics"
           />
           <IconButton
             className={cx('buttonIcon')}
             onClick={handle.handleClickFc}
             icon={<BsThreeDots className={cx('iconTextSubBtn')} />}
-            labelTooltip="More"
+            content="More"
           />
           <UserImg onClick={handle.handleClickUS} imgUrl="/img/1.jpg" />
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import style from './iconButton.module.scss';
 import classNames from 'classnames/bind';
+import { dataTheme, DataTheme } from './data';
 import { IoClose, IoSearch } from 'react-icons/io5';
 import { FaPlus, FaAngleLeft } from 'react-icons/fa6';
 import { BsStars } from 'react-icons/bs';
@@ -16,9 +17,13 @@ interface ThemeModalProps {
 
 export const ThemeModal: React.FC<ThemeModalProps> = ({ isVisible, onClose }) => {
   const [showSearchElement, setShowSearchElement] = useState(true);
-
   const toggleElements = () => {
     setShowSearchElement(!showSearchElement);
+  };
+
+  const [activeDiv, setActiveDiv] = useState<string | null>(null);
+  const handleClick = (id: string) => {
+    setActiveDiv(id);
   };
 
   if (!isVisible) return null;
@@ -34,13 +39,13 @@ export const ThemeModal: React.FC<ThemeModalProps> = ({ isVisible, onClose }) =>
               onClick={() => onClose()}
               label="New Theme"
               icon={<FaPlus className={cx('iconAddMg')} />}
-              labelTooltip="Add new Theme"
+              content="Add new Theme"
             />
             <div className={cx('theme-modal-add-btn')}></div>
             <IconButton
               className={cx('btn-close')}
               icon={<IoClose className={cx('iconNonMg')} />}
-              labelTooltip="Close"
+              content="Close"
               onClick={() => onClose()}
             />
           </div>
@@ -86,160 +91,38 @@ export const ThemeModal: React.FC<ThemeModalProps> = ({ isVisible, onClose }) =>
           </div>
 
           <div className={cx('lib-theme')}>
-            <CardTheme
-              borThemeCor={{ background: 'pink' }}
-              titleStyle={{ fontFamily: 'sans-serif', color: 'black', fontWeight: 'bold', fontSize: '24px' }}
-              bodyStyle={{ fontFamily: 'sans-serif', color: 'black', fontSize: '14px' }}
-              linkStyle={{
-                fontFamily: 'sans-serif',
-                color: 'black',
-                fontStyle: 'italic',
-                fontSize: '14px',
-                textDecoration: 'underline',
-                fontWeight: 'bold',
-              }}
-              imgUrl="/img/pink-color-test.jpg"
-              themeName="Nebulae"
-            />
-
-            <CardTheme
-              borThemeCor={{ background: 'blue' }}
-              titleStyle={{ fontFamily: 'sans-serif', color: 'white', fontWeight: 'bold', fontSize: '24px' }}
-              bodyStyle={{ fontFamily: 'sans-serif', color: 'white', fontSize: '14px' }}
-              linkStyle={{
-                fontFamily: 'sans-serif',
-                color: 'white',
-                fontStyle: 'italic',
-                fontSize: '14px',
-                textDecoration: 'underline',
-                fontWeight: 'bold',
-              }}
-              imgUrl="/img/blue-green-gradient.png"
-              themeName="Blue Steel"
-            />
-
-            <CardTheme
-              borThemeCor={{ background: 'rgb(144 15 167)' }}
-              titleStyle={{ fontFamily: 'sans-serif', color: 'white', fontWeight: 'bold', fontSize: '24px' }}
-              bodyStyle={{ fontFamily: 'sans-serif', color: 'white', fontSize: '14px' }}
-              linkStyle={{
-                fontFamily: 'sans-serif',
-                color: 'white',
-                fontStyle: 'italic',
-                fontSize: '14px',
-                textDecoration: 'underline',
-                fontWeight: 'bold',
-              }}
-              imgUrl="/img/pink-purple-gradient.jpg"
-              themeName="Pink Purple"
-            />
-
-            <CardTheme
-              borThemeCor={{ background: 'orange' }}
-              titleStyle={{ fontFamily: 'sans-serif', color: 'black', fontWeight: 'bold', fontSize: '24px' }}
-              bodyStyle={{ fontFamily: 'sans-serif', color: 'black', fontSize: '14px' }}
-              linkStyle={{
-                fontFamily: 'sans-serif',
-                color: 'black',
-                fontStyle: 'italic',
-                fontSize: '14px',
-                textDecoration: 'underline',
-                fontWeight: 'bold',
-              }}
-              imgUrl="/img/red-orange-gradient.jpg"
-              themeName="Red Orange"
-            />
-            <CardTheme
-              borThemeCor={{ background: 'orange' }}
-              titleStyle={{ fontFamily: 'sans-serif', color: 'black', fontWeight: 'bold', fontSize: '24px' }}
-              bodyStyle={{ fontFamily: 'sans-serif', color: 'black', fontSize: '14px' }}
-              linkStyle={{
-                fontFamily: 'sans-serif',
-                color: 'black',
-                fontStyle: 'italic',
-                fontSize: '14px',
-                textDecoration: 'underline',
-                fontWeight: 'bold',
-              }}
-              imgUrl="/img/red-orange-gradient.jpg"
-              themeName="Red Orange"
-            />
-            <CardTheme
-              borThemeCor={{ background: 'orange' }}
-              titleStyle={{ fontFamily: 'sans-serif', color: 'black', fontWeight: 'bold', fontSize: '24px' }}
-              bodyStyle={{ fontFamily: 'sans-serif', color: 'black', fontSize: '14px' }}
-              linkStyle={{
-                fontFamily: 'sans-serif',
-                color: 'black',
-                fontStyle: 'italic',
-                fontSize: '14px',
-                textDecoration: 'underline',
-                fontWeight: 'bold',
-              }}
-              imgUrl="/img/red-orange-gradient.jpg"
-              themeName="Red Orange"
-            />
-            <CardTheme
-              borThemeCor={{ background: 'orange' }}
-              titleStyle={{ fontFamily: 'sans-serif', color: 'black', fontWeight: 'bold', fontSize: '24px' }}
-              bodyStyle={{ fontFamily: 'sans-serif', color: 'black', fontSize: '14px' }}
-              linkStyle={{
-                fontFamily: 'sans-serif',
-                color: 'black',
-                fontStyle: 'italic',
-                fontSize: '14px',
-                textDecoration: 'underline',
-                fontWeight: 'bold',
-              }}
-              imgUrl="/img/red-orange-gradient.jpg"
-              themeName="Red Orange"
-            />
-            <CardTheme
-              borThemeCor={{ background: 'orange' }}
-              titleStyle={{ fontFamily: 'sans-serif', color: 'black', fontWeight: 'bold', fontSize: '24px' }}
-              bodyStyle={{ fontFamily: 'sans-serif', color: 'black', fontSize: '14px' }}
-              linkStyle={{
-                fontFamily: 'sans-serif',
-                color: 'black',
-                fontStyle: 'italic',
-                fontSize: '14px',
-                textDecoration: 'underline',
-                fontWeight: 'bold',
-              }}
-              imgUrl="/img/red-orange-gradient.jpg"
-              themeName="Red Orange"
-            />
-            <CardTheme
-              borThemeCor={{ background: 'orange' }}
-              titleStyle={{ fontFamily: 'sans-serif', color: 'black', fontWeight: 'bold', fontSize: '24px' }}
-              bodyStyle={{ fontFamily: 'sans-serif', color: 'black', fontSize: '14px' }}
-              linkStyle={{
-                fontFamily: 'sans-serif',
-                color: 'black',
-                fontStyle: 'italic',
-                fontSize: '14px',
-                textDecoration: 'underline',
-                fontWeight: 'bold',
-              }}
-              imgUrl="/img/red-orange-gradient.jpg"
-              themeName="Red Orange"
-            />
-            <CardTheme
-              borThemeCor={{ background: 'orange' }}
-              titleStyle={{ fontFamily: 'sans-serif', color: 'black', fontWeight: 'bold', fontSize: '24px' }}
-              bodyStyle={{ fontFamily: 'sans-serif', color: 'black', fontSize: '14px' }}
-              linkStyle={{
-                fontFamily: 'sans-serif',
-                color: 'black',
-                fontStyle: 'italic',
-                fontSize: '14px',
-                textDecoration: 'underline',
-                fontWeight: 'bold',
-              }}
-              imgUrl="/img/red-orange-gradient.jpg"
-              themeName="Red Orange"
-            />
+            {dataTheme.map((div: DataTheme) => (
+              <CardTheme
+                key={div.id}
+                data={div}
+                onClick={handleClick}
+                isActive={activeDiv === div.id}
+                borThemeCor={{ background: div.borThemeCor.background }}
+                titleStyle={{
+                  fontFamily: div.titleStyle.fontFamily,
+                  color: div.titleStyle.color,
+                  fontWeight: div.titleStyle.fontWeight,
+                  fontSize: div.titleStyle.fontSize,
+                }}
+                bodyStyle={{
+                  fontFamily: div.bodyStyle.fontFamily,
+                  color: div.bodyStyle.color,
+                  fontSize: div.bodyStyle.fontSize,
+                }}
+                linkStyle={{
+                  fontFamily: div.linkStyle.fontFamily,
+                  color: div.linkStyle.color,
+                  fontStyle: div.linkStyle.fontStyle,
+                  fontSize: div.linkStyle.fontSize,
+                  textDecoration: div.linkStyle.textDecoration,
+                  fontWeight: div.linkStyle.fontWeight,
+                }}
+                imgUrl={div.imgUrl}
+                themeName={div.themeName}
+              />
+            ))}
           </div>
+
           <div className={cx('edit-bg-card')}>
             <p className={cx('title')}>Bạn đang tìm kiếm việc chỉ thay đổi nền của trang?</p>
             <div className={cx('btn-box')}>
